@@ -1,0 +1,11 @@
+
+T
+squid:S106*"9Replace this use of System.out or System.err by a logger.(žÛ‰¥ÿÿÿÿÿ
+Xsquid:UselessImportCheck"/Remove this unused import 'java.sql.SQLOutput'.(ê¤òÃùÿÿÿÿ
+Vsquid:UnusedPrivateMethod"1Remove this unused private "ApplesFilter" method.(¹³“Ÿ
+Msquid:UselessImportCheck	")Remove this unused import 'java.io.File'.(†Ð¥Å
+gsquid:CommentedOutCodeLine'"<This block of commented-out lines of code should be removed.(íµÆÌúÿÿÿÿ
+[squid:UselessImportCheck"2Remove this unused import 'java.util.Collections'.(¢³ïÓþÿÿÿÿ
+fsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹³“Ÿ
+Ssquid:UselessImportCheck
+"/Remove this unused import 'java.io.FileFilter'.(ÔÅÑ—

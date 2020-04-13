@@ -1,0 +1,14 @@
+
+Fsquid:S1148k"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8·ÂµÙõ-
+V
+squid:S106i"9Replace this use of System.out or System.err by a logger.(¼–¢8·ÂµÙõ-
+[
+squid:S106\"9Replace this use of System.out or System.err by a logger.(©¬èùÿÿÿÿ8—ºÓïñ-
+V
+squid:S106]"9Replace this use of System.out or System.err by a logger.(ş©°°8·‹¯ïñ-
+jsquid:S001122"FDefine and throw a dedicated exception instead of using a generic one.(şÚ…Òÿÿÿÿÿ8íãÿØõ-
+asquid:S2095T"CUse try-with-resources or close this "Jedis" in a "finally" clause.(×«¤È8©¶×âƒ.
+Fsquid:S1148."#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8µ™‹×õ-
+Fsquid:S11489"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8·ÂµÙõ-
+_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ùŒÙõ-
+bsquid:S3252V"DUse static access with "com.alibaba.fastjson.JSON" for "parseArray".(¢ô¡8Öãïñ-

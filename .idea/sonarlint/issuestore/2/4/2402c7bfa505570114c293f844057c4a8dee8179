@@ -1,0 +1,17 @@
+
+Tsquid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+Usquid:UselessImportCheck"1Remove this unused import 'java.util.Comparator'.(î¹ó¹
+Dsquid:S1604"(Make this anonymous inner class a lambda(’¯Ì¢ùÿÿÿÿ
+esquid:UselessImportCheck"<Remove this unused import 'com.google.common.collect.Lists'.(ˆäóöøÿÿÿÿ
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(´ýùíýÿÿÿÿ
+Lsquid:S1481%"5Remove this unused "redAndHeavyApple" local variable.(öýÁµ
+Gsquid:S1481$"0Remove this unused "notRedApple" local variable.(º—’ï
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(’¾§þÿÿÿÿ
+Wsquid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ
+_squid:UselessImportCheck";Remove this unused import 'com.google.common.collect.Maps'.(¯œÐ
+Asquid:S1481""*Remove this unused "apple" local variable.(Óµ‡
+O
+squid:S106 "9Replace this use of System.out or System.err by a logger.(Â…”ü
+Nsquid:S1481&"7Remove this unused "morePredicateApple" local variable.(ë¶´ó
