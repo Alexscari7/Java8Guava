@@ -1,45 +1,0 @@
-
-5squid:S2119ï"Save and re-use this "Random".(¼ÝÅf
-hsquid:UselessImportCheck"?Remove this unused import 'java.util.concurrent.ThreadFactory'.(ã’Ÿºúÿÿÿÿ
-esquid:S11929"IDefine a constant instead of duplicating this literal "jialefu" 14 times.(¥”ŽÎùÿÿÿÿ
-@squid:S1148À"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-`squid:S2147*"DCombine this catch with the one at line 40, which has the same body.(åþŒóùÿÿÿÿ
-dsquid:S1192 "HDefine a constant instead of duplicating this literal "family" 14 times.(Ÿ§´Äýÿÿÿÿ
-T
-squid:S106."9Replace this use of System.out or System.err by a logger.(ú°™·ùÿÿÿÿ
-N
-squid:S106'"9Replace this use of System.out or System.err by a logger.(ô‘ïu
-@squid:S1148ß"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-]squid:S2142("FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
-^squid:UnusedPrivateMethod8"9Remove this unused private "getAllPriceUseStream" method.(þâˆ„
-T
-squid:S106_"9Replace this use of System.out or System.err by a logger.(¥˜ÚÉüÿÿÿÿ
-T
-squid:S106$"9Replace this use of System.out or System.err by a logger.(…Õ·¢ûÿÿÿÿ
-?squid:S1148+"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-O
-squid:S106C"9Replace this use of System.out or System.err by a logger.(¦«Òà
-P
-squid:S106‡"9Replace this use of System.out or System.err by a logger.(¼ïÓ·
-^squid:S2142ò"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
-dsquid:S1192"HDefine a constant instead of duplicating this literal "eggtart" 3 times.(¹ôéÛøÿÿÿÿ
-hsquid:CommentedOutCodeLine™"<This block of commented-out lines of code should be removed.(¯»ÎÀýÿÿÿÿ
-esquid:S11929"IDefine a constant instead of duplicating this literal "walmart" 14 times.(¥”ŽÎùÿÿÿÿ
-dsquid:S11929"HDefine a constant instead of duplicating this literal "costco" 16 times.(¥”ŽÎùÿÿÿÿ
-@squid:S1148ó"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-O
-squid:S106`"9Replace this use of System.out or System.err by a logger.(¼ïÓ·
-psquid:S1192D"YDefine a constant instead of duplicating this literal "Get all price takes %dms" 4 times.(¼ïÓ·
-O
-squid:S106t"9Replace this use of System.out or System.err by a logger.(¼ïÓ·
-^squid:S2142Þ"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
-gsquid:CommentedOutCodeLine3"<This block of commented-out lines of code should be removed.(…ö×‹üÿÿÿÿ
-T
-squid:S106s"9Replace this use of System.out or System.err by a logger.(„ÓÏÿÿÿÿÿ
-O
-squid:S106D"9Replace this use of System.out or System.err by a logger.(¼ïÓ·
-?squid:S1148)"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-U
-squid:S106„"9Replace this use of System.out or System.err by a logger.(Þ·Žÿÿÿÿÿ
-T
-squid:S106?"9Replace this use of System.out or System.err by a logger.(›ˆÀ þÿÿÿÿ

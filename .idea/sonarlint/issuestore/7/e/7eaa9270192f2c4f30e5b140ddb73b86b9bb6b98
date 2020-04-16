@@ -1,5 +1,0 @@
-
-qsquid:UselessImportCheck"ARemove this unused import 'java.util.concurrent.ExecutorService'.(æ÷–£ùÿÿÿÿ8ñá—Àñ-
-Msquid:S2440"/Remove this instantiation of "SingletonHolder".(Ó­À‡8ñá—Àñ-
-jsquid:UselessImportCheck":Remove this unused import 'java.util.concurrent.Executor'.(÷ý¶Œúÿÿÿÿ8øÙà¿ñ-
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(§þ€Âüÿÿÿÿ
