@@ -143,11 +143,13 @@ public class forTest {
     @Test
     public void test5(){
         // 布隆过滤器
+        long createStart = System.nanoTime();
         BloomFilter<CharSequence> bf = BloomFilter.create(Funnels.stringFunnel(Charset.forName("utf-8")), 10_000_000, 0.0001);
         IntStream.rangeClosed(1,10_000_000).boxed().map(String::valueOf).forEach(i -> bf.put(i));
-        long start = System.nanoTime();
+        long middleTime = System.nanoTime();
+        System.out.println("time for create filter :" + (middleTime - createStart)/1000_000_000.0 + "s");
         System.out.println(bf.mightContain("123"));
-        System.out.println((System.nanoTime() - start)/1000_000.0);
+        System.out.println("time for get result :" + (System.nanoTime() - middleTime)/1000_000_000.0 + "s");
     }
 
     @Test
@@ -268,7 +270,7 @@ public class forTest {
 
     @Test
     public void test10() throws Exception {
-        Map<String, String> map = Collections.EMPTY_MAP;
+        Map<String, String> map = Collections.emptyMap();
         System.out.println(map.isEmpty());
         System.out.println(map.size());
         System.out.println(map == null);

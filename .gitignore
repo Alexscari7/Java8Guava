@@ -9,5 +9,6 @@
 out/
 gen
 build/
+logs/
 
 

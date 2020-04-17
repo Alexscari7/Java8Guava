@@ -1,11 +1,9 @@
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+package java8start;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
 
 /**
  * @author wusd
@@ -40,3 +38,4 @@ public class LambdaForRunable {
 
 
 }
+

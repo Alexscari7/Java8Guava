@@ -1,15 +1,10 @@
+package java8start;
+
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -84,14 +79,14 @@ interface AppleFormatter{
     String accept(Apple apple);
 }
 
-class AppleHeavyPrinter implements AppleFormatter{
+class AppleHeavyPrinter implements AppleFormatter {
     @Override
     public String accept(Apple apple) {
         return "A " + (apple.getWeight()>10 ? "heavy " : "light ") + apple.getColor() + " apple";
     }
 }
 
-class AppleSimplePrinter implements AppleFormatter{
+class AppleSimplePrinter implements AppleFormatter {
     @Override
     public String accept(Apple apple) {
         return "An apple of " + apple.getWeight()+"g";
