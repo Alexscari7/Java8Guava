@@ -236,44 +236,8 @@ public class forTest {
     }
 
     @Test
-    public void test9() throws Exception {
-        String s = "[{\"departmentId\":\"100100\",\"parentDepartmentId\":\"-1\"},{\"departmentId\":\"wusdep4\"," +
-                "\"parentDepartmentId\":\"100100\"},{\"departmentId\":\"wusdep5\",\"parentDepartmentId\":\"100100\"}]";
-        List<TaskNodeDepartmentInfoInstEntity> taskNodeDepartmentInfoInstEntities = JSONArray.parseArray(s, TaskNodeDepartmentInfoInstEntity.class);
-        List<TaskNodeDepartmentInfoInstEntity> nodeList = Lists.newArrayList();
-        getAllParentNodes(taskNodeDepartmentInfoInstEntities, nodeList, "wusdep4");
-        //getRejectTaskNodeDepartmentInfoInstEntityList(taskNodeDepartmentInfoInstEntities, nodeList, "wusdep4","wusdep4");
-        nodeList.forEach(t -> System.out.println(t.getDepartmentId()));
-
-
-    }
-
-    private static void getBetweenNodes(
-            List<TaskNodeDepartmentInfoInstEntity> taskNodeDepartmentInfoInstEntities,
-            List<TaskNodeDepartmentInfoInstEntity> parentNodeList, String start, String end) throws Exception {
-        if (start.equals(end)) {
-            return;
-        }
-        TaskNodeDepartmentInfoInstEntity node =
-                taskNodeDepartmentInfoInstEntities.stream().filter(t -> start.equals(t.getDepartmentId())).findAny().orElseThrow(() -> new Exception("顶级节点不存在"));
-        parentNodeList.add(node);
-        String newStart = node.getParentDepartmentId();
-        getBetweenNodes(taskNodeDepartmentInfoInstEntities, parentNodeList, newStart, end);
-
-    }
-
-    public static void getAllParentNodes(List<TaskNodeDepartmentInfoInstEntity> allNodeList,
-                                         List<TaskNodeDepartmentInfoInstEntity> parentNodeList, String start) throws Exception {
-        getBetweenNodes(allNodeList, parentNodeList, start, "-1");
-        parentNodeList.removeIf(t -> start.equals(t.getDepartmentId()));
-    }
-
-    @Test
     public void test10() throws Exception {
-        Map<String, String> map = Collections.emptyMap();
-        System.out.println(map.isEmpty());
-        System.out.println(map.size());
-        System.out.println(map == null);
+        System.out.println(-1>>1);
     }
 
 }
