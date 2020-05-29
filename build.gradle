@@ -4,7 +4,7 @@
 
 plugins {
     id 'java'
-    id "io.freefair.lombok" version "3.6.6"
+    id "io.franzbecker.gradle-lombok" version "4.0.0"
 }
 
 repositories {
@@ -23,11 +23,10 @@ dependencies {
     // implementation不能传递依赖，编译更快
     // lombok插件直接通过plugin引入，不需要单独引入依赖和注解
     // 对于slf4，相当于接口，实现类可以使用log4j2和logback(推荐)
-    // 对于junit，jupiter-api是接口，实现类为junit
+    // junit5 由junit4升级，本来包括junit、platform、vintage三个模块，这里直接使用聚合依赖
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.slf4j:slf4j-log4j12:1.7.25'
-    compile 'org.junit.jupiter:junit-jupiter-api:5.3.2'
-    compile 'junit:junit:4.12'
+    implementation 'org.junit.jupiter:junit-jupiter:5.6.0'
     compile 'com.alibaba:fastjson:1.2.58'
     compile 'com.google.guava:guava:27.0.1-jre'
     implementation 'org.apache.commons:commons-lang3:3.9'

@@ -13,17 +13,44 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.beans.PropertyDescriptor;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.TreeMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -236,8 +263,36 @@ public class forTest {
     }
 
     @Test
-    public void test10() throws Exception {
-        System.out.println(-1>>1);
+    public void test10() throws IOException, InterruptedException {
+        Thread threadWriter = new Thread(() -> {
+            try {
+                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("F:\\logs\\123.txt"))));
+                for (int i = 1; i < 10; i++) {
+                    out.write(i + "\n");
+                    out.flush();
+                    Thread.sleep(1000);
+                }
+                System.out.println("write done");
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        Thread threadReader = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(new File("F:\\logs\\123.txt"))));
+                String s;
+                while ((s = in.readLine()) != null) {
+                    System.out.println(s);
+                }
+                System.out.println("reader done");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        threadReader.start();
+        threadWriter.start();
+        Thread.sleep(15000);
     }
-
 }

@@ -1,5 +1,6 @@
 package test;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class FirstStart {
     @Test
     public void test1() {
-        System.out.println(1);
+        Assertions.assertEquals(4, 2);
     }
 
 }
