@@ -53,7 +53,7 @@ task createDistribution(type: Zip){
     }
 }
 
-task  backupReleaseDistribution(type: Copy){
+task backupReleaseDistribution(type: Copy){
     from createDistribution.outputs.files
     into "$buildDir/backup"
     rename('Java8Guava-1.0.zip','myapp.zip')
@@ -63,4 +63,15 @@ task release(dependsOn: backupReleaseDistribution){
     doLast {
         logger.quiet 'Releasing the project...'
     }
+}
+
+test {
+    useJUnitPlatform{
+        excludeTags "fail-test"
+    }
+    include(["**/*Tests.class", "**/*Start.class"])
+    systemProperties = [
+            'junit.jupiter.testinstance.lifecycle.default': 'per_method'
+    ]
+    systemProperty 'java.util.logging.manager', 'org.apache.logging.log4j.jul.LogManager'
 }

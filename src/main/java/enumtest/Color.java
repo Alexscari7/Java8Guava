@@ -32,7 +32,7 @@ public enum Color {
     Color(String name, String index) {
         this.name = name;
         this.index = index;
-        System.out.println("args constructor");
+        System.out.println("args constructor, this is " + name);
     }
     Color(){
         System.out.println("no args");
@@ -49,7 +49,7 @@ public enum Color {
 class EnumTest {
 
     @Test
-    public void test(){
+    void test(){
         Color red = Color.RED;
         Color yellow = Color.YELLOW;
         System.out.println(yellow.toString());

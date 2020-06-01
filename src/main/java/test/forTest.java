@@ -264,35 +264,6 @@ public class forTest {
 
     @Test
     public void test10() throws IOException, InterruptedException {
-        Thread threadWriter = new Thread(() -> {
-            try {
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("F:\\logs\\123.txt"))));
-                for (int i = 1; i < 10; i++) {
-                    out.write(i + "\n");
-                    out.flush();
-                    Thread.sleep(1000);
-                }
-                System.out.println("write done");
-                out.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        Thread threadReader = new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(new File("F:\\logs\\123.txt"))));
-                String s;
-                while ((s = in.readLine()) != null) {
-                    System.out.println(s);
-                }
-                System.out.println("reader done");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        threadReader.start();
-        threadWriter.start();
-        Thread.sleep(15000);
+        log.error("111");
     }
 }
