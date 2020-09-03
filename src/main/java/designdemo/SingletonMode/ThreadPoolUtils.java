@@ -33,14 +33,13 @@ public class ThreadPoolUtils {
     public void doSomeThing(){
         threadPool.execute(() -> System.out.println(1));
     }
-}
 
-class Test{
     public static void main(String[] args) {
         ThreadPoolUtils instance = ThreadPoolUtils.getInstance();
         ExecutorService threadPool = instance.getThreadPool();
         ThreadPoolUtils instance1 = ThreadPoolUtils.getInstance();
         ExecutorService threadPool1 = instance.getThreadPool();
+
         ThreadPoolUtils.getInstance().doSomeThing();
     }
 }

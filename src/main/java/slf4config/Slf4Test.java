@@ -17,8 +17,8 @@ public class Slf4Test {
     public void test() throws UnknownHostException {
         InetAddress inetAddress = InetAddress.getLocalHost();
         String url = String.format("http://%s:%s/admin", inetAddress.getHostAddress(), "8090");
-        log.debug("debug");
-        log.info("info");
+        log.debug("这是debug日志");
+        log.info("这是info日志");
         log.warn("{}",url);
         log.error("错误", new IllegalArgumentException("参数异常"));
     }

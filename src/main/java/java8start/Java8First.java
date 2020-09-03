@@ -33,6 +33,8 @@ public class Java8First {
         //System.out.println(ApplesFilter(apples, (Apple a) -> a.getWeight() > 10 || "green".equals(a.getColor())));
         List<Apple> filtedApples = apples.stream().filter((Apple a) -> a.getWeight() > 10).collect(Collectors.toList());
         System.out.println(filtedApples);
+        AppleINS appleINS = (s, d) -> new Apple(s, d);
+        Apple apple = appleINS.get("2", 2.3);
     }
 
 }

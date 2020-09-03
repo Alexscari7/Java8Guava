@@ -23,5 +23,6 @@ public class StrategyMode {
         StrategyMode strategyMode = new StrategyMode((String s) -> s.matches("\\d+"));
         boolean b = strategyMode.validate("wsd");
         System.out.println(b);
+        System.out.println(111);
     }
 }

@@ -32,4 +32,24 @@ public class Singletonn {
         }
         return instance;
     }
+
+    public Singletonn getInstance2() {
+        Singletonn localInstance = instance;
+        if (localInstance == null) {
+            synchronized (this) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new Singletonn();
+                }
+            }
+        }
+        return localInstance;
+    }
+
+    public static void main(String[] args) {
+        Singletonn s1 = new Singletonn();
+        Singletonn instance1 = s1.getInstance2();
+        Singletonn s2 = new Singletonn();
+        Singletonn instance2 = s2.getInstance2();
+    }
 }

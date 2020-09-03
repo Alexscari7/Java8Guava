@@ -65,38 +65,7 @@ public class RedisUtils {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static void main(String[] args) {
-        long l = System.nanoTime();
-        Jedis jedis = new Jedis("10.201.62.142", 6379);
-        String s = "[\"set_bpm_config_biz\", \"get_bpm_his_record\"]";
-        List<String> list = JSONArray.parseArray(s, String.class);
-        String[] keys = list.stream().map(t -> "kosg:api:kbpm:" + t + ".v1.0").toArray(String[]::new);
-        Object map = jedis.eval("local result={}  for i = 1,#(KEYS) do result[i]= redis.call('hget',KEYS[i],'app') " +
-                "end return result", keys.length, keys);
-        long e = System.nanoTime();
-        String jsonObject = JSON.toJSONString(map);
-        System.out.println(jsonObject);
-        System.out.println((e-l)/1000_000);
-    }
-}
-
-class TTTEST{
-    @Test
-    public void test1() {
         Jedis jedis1 = null;
         Jedis jedis2 = null;
         try {
@@ -106,6 +75,5 @@ class TTTEST{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

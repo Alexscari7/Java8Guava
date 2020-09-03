@@ -1,9 +1,8 @@
 package test;
 
-import com.alibaba.fastjson.JSONArray;
+import Entitys.Entity;
+import Entitys.TreeNode;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.hash.BloomFilter;
@@ -13,44 +12,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.beans.PropertyDescriptor;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.nio.charset.Charset;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.Optional;
+import java.util.Scanner;
 import java.util.TreeMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -226,44 +199,101 @@ public class forTest {
     }
 
     @Test
-    public void speedTest(){
-        String modelFieldMapJson = "{\"41\":{\"0\":\"中信证券股份有限公司\",\"1\":\"管理类别一\"},\"1\":{\"0\":\"中信信托有限责任公司\"," +
-                "\"1\":\"管理类别一\"},\"2\":{\"0\":\"中信保诚人寿保险有限公司\",\"1\":\"管理类别一\"},\n" +
-                "\"3\":{\"0\":\"中信资产管理有限公司\",\"1\":\"管理类别二\"},\"4\":{\"0\":\"中信财务有限公司\",\"1\":\"管理类别二\"},\"5\":{\"0\":\"中信重工机械股份有限公司\",\"1\":\"管理类别二\"},\n" +
-                "\"6\":{\"0\":\"中信戴卡股份有限公司\",\"1\":\"管理类别二\"},\"7\":{\"0\":\"中信泰富特钢集团有限公司\",\"1\":\"管理类别二\"},\"8\":{\"0\":\"中信建设有限责任公司\",\"1\":\"管理类别三\"},\n" +
-                "\"9\":{\"0\":\"中信工程设计建设有限公司\",\"1\":\"管理类别三\"},\"10\":{\"0\":\"中信出版集团股份有限公司\",\"1\":\"管理类别三\"},\"11\":{\"0\":\"中信医疗健康产业集团有限公司\",\n" +
-                "\"1\":\"管理类别三\"},\"12\":{\"0\":\"中信农业科技股份有限公司\",\"1\":\"管理类别三\"},\"13\":{\"0\":\"中信金属集团有限公司\",\"1\":\"管理类别三\"},\"14\":{\"0\":\"中信和业投资有限公司\",\n" +
-                "\"1\":\"管理类别四\"},\"15\":{\"0\":\"中信银行股份有限公司\",\"1\":\"管理类别一\"},\"16\":{\"0\":\"华夏基金管理有限公司\",\"1\":\"管理类别一\"},\"17\":{\"0\":\"中信期货有限公司\",\n" +
-                "\"1\":\"管理类别一\"},\"18\":{\"0\":\"中信建投证券股份有限公司\",\"1\":\"管理类别一\"},\"19\":{\"0\":\"中信建投基金管理有限公司\",\"1\":\"管理类别一\"},\"20\":{\"0\":\"中信建投期货有限公司\",\n" +
-                "\"1\":\"管理类别一\"},\"21\":{\"0\":\"中信保诚基金管理有限公司\",\"1\":\"管理类别一\"},\"22\":{\"0\":\"中信国际电讯集团有限公司\",\"1\":\"管理类别二\"},\"23\":{\"0\":\"中信数字媒体网络有限公司\",\n" +
-                "\"1\":\"管理类别二\"},\"24\":{\"0\":\"中信云网有限公司\",\"1\":\"管理类别二\"},\"25\":{\"0\":\"中信控股有限责任公司\",\"1\":\"管理类别二\"},\"26\":{\"0\":\"中信海洋直升机股份有限公司\",\"1\":\n" +
-                "\"管理类别三\"},\"27\":{\"0\":\"中信投资控股有限公司\",\"1\":\"管理类别三\"},\"28\":{\"0\":\"中信环境投资集团有限公司\",\"1\":\"管理类别三\"},\"29\":{\"0\":\"中信国安葡萄酒业股份有限公司\",\n" +
-                "\"1\":\"管理类别三\"},\"30\":{\"0\":\"大昌行集团有限公司\",\"1\":\"管理类别三\"},\"31\":{\"0\":\"中信机电制造公司\",\"1\":\"管理类别四\"},\"32\":{\"0\":\"中信矿业科技发展有限公司\",\n" +
-                "\"1\":\"管理类别四\"},\"33\":{\"0\":\"中信兴业投资集团有限公司\",\"1\":\"管理类别四\"},\"34\":{\"0\":\"中信资产运营有限公司\",\"1\":\"管理类别四\"},\"35\":{\"0\":\"中信置业有限公司\",\n" +
-                "\"1\":\"管理类别四\"},\"36\":{\"0\":\"中信城市开发运营有限责任公司\",\"1\":\"管理类别四\"},\"37\":{\"0\":\"中信泰富有限公司\",\"1\":\"管理类别四\"},\"38\":{\"0\":\"中信国安集团有限公司\",\n" +
-                "\"1\":\"管理类别四\"},\"39\":{\"0\":\"中信建筑设计研究总院有限公司\",\"1\":\"管理类别三\"},\"40\":{\"0\":\"中国市政工程中南设计研究总院有限公司\",\"1\":\"管理类别三\"}}";
-        Map<String, List<String>> modelFieldMap = JSONObject.parseObject(modelFieldMapJson, Map.class);
-        List<String> sortIndexList = Lists.newArrayList(modelFieldMap.keySet());
-        int maxCountOfSingleThread = (int) Math.ceil(Math.sqrt(sortIndexList.size()));
-        List<Map<String, List<String>>> childModelFieldList = new ArrayList<>();
-        int taskCount = (int) Math.ceil(sortIndexList.size() * 1.0 / maxCountOfSingleThread);
-        System.out.println(taskCount);
-        for (int i = 0; i < taskCount; i++) {
-            Map<String, List<String>> childModelFieldMap = Maps.newHashMap();
-            for (int j = i * maxCountOfSingleThread; j < (i + 1) * maxCountOfSingleThread; j++) {
-                if (j < sortIndexList.size()) {
-                    String sortIndex = sortIndexList.get(j);
-                    childModelFieldMap.put(sortIndex, modelFieldMap.get(sortIndex));
+    public void speedTest() throws ClassNotFoundException, NoSuchFieldException, InterruptedException {
+        Object lock = new Object();
+        Thread a = new Thread(() -> {
+            synchronized (lock) {
+                try {
+                    lock.wait();
+                    for (int i = 0; i < 10; i++) {
+                        System.out.println(1);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-            childModelFieldList.add(childModelFieldMap);
-        }
+        });
+        Thread b = new Thread(() -> {
+            synchronized (lock) {
+                lock.notify();
+            }
+        });
+        a.start();
+        Thread.sleep(1000);
+        b.start();
 
-        childModelFieldList.forEach(System.out::println);
     }
 
     @Test
-    public void test10() throws IOException, InterruptedException {
-        log.error("111");
+    void rebuildTreeBySerl() throws Exception {
+        // 终于
+        int[] preorder = {1, 2, 4, 7, 3, 5, 6, 8};
+        int[] inorder = {4, 7, 2, 1, 5, 3, 8, 6};
+        // 根据先序和中序序列重建二叉树
+        TreeNode root =  rebuildTree(preorder, 0, preorder.length-1,
+                inorder, 0, inorder.length-1);
+
+        // 获取每一层中的节点 宽度优先？
+        List<HashMap<Integer, Object>> list = Lists.newArrayList();
+        traveTree(0, root, list);
+        Map<Integer, List<Object>> collect = list.stream().collect(Collectors.groupingBy(t -> t.keySet().iterator().next(),
+                Collectors.mapping(t -> t.values().iterator().next(), Collectors.toList())));
+        System.out.println(collect);
+
+        Integer i = Optional.of(1).orElse(0);
+
     }
+
+    private void traveTree(int i, TreeNode root, List<HashMap<Integer, Object>> list) {
+        if (root != null) {
+            int n = i + 1;
+            List<Object> innerList = Lists.newArrayList();
+            HashMap<Integer, Object> map = Maps.newHashMap();
+            map.put(n, root.value);
+            innerList.add(map);
+            list.add(map);
+
+            traveTree(n, root.left, list);
+            traveTree(n, root.right, list);
+        }
+    }
+
+    private TreeNode rebuildTree(int[] preorder, int startPreorder, int endPreorder, int[] inorder, int startInorder,
+                                 int endInorder) {
+        TreeNode root = new TreeNode();
+        // 获取root元素在中序中的相对位置
+        int breakLength = getBreakLength(preorder, startPreorder, inorder, startInorder, endInorder);
+
+        int lStartInorder = startInorder;
+        int lEndInorder = startInorder + breakLength - 1;
+        int lStartPreorder = startPreorder + 1;
+        int lEndPreorder = startPreorder + breakLength;
+
+        int rStartInorder = startInorder + breakLength + 1;
+        int rEndInorder = endInorder;
+        int rStartPreorder = startPreorder + breakLength + 1;
+        int rEndPreorder = endPreorder;
+
+        root.value = preorder[startPreorder];
+        root.left = breakLength == 0 ? null :
+                rebuildTree(preorder, lStartPreorder, lEndPreorder, inorder, lStartInorder, lEndInorder);
+        root.right = (breakLength == endInorder - startInorder) ? null :
+                rebuildTree(preorder, rStartPreorder, rEndPreorder, inorder, rStartInorder, rEndInorder);
+        return root;
+    }
+
+    private int getBreakLength(int[] preorder, int startPreorder, int[] inorder, int startInorder, int endInorder) {
+        for (int i = startInorder; i < endInorder + 1; i++) {
+            if(inorder[i] == preorder[startPreorder])
+                return i - startInorder;
+        }
+        return -1;
+    }
+
+    @Test
+    void test12() throws IOException {
+        System.out.println("开始监听");
+        System.in.read();
+    }
+
 }

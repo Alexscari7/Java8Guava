@@ -8,7 +8,7 @@ package designdemo.SingletonMode;
  */
 public class Singletonnn {
     private Singletonnn(){}
-    private volatile static Singletonnn instance;
+    private static volatile Singletonnn instance;
 
     public static Singletonnn getInstance() {
         if (instance == null) {
