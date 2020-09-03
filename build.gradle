@@ -22,15 +22,17 @@ repositories {
 dependencies {
     // implementation不能传递依赖，编译更快
     // lombok插件直接通过plugin引入，不需要单独引入依赖和注解
-    // 对于slf4，相当于接口，实现类可以使用log4j2和logback(推荐)
+    // 对于slf4，相当于接口，实现类可以使用log4j2和logback(推荐)。理论上需要slf4j接口、连接桥和实现类jar包(但一般都是两两结合)
     // junit5 由junit4升级，本来包括junit、platform、vintage三个模块，这里直接使用聚合依赖
-    compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'org.slf4j:slf4j-log4j12:1.7.25'
+
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.12.1'
+
     implementation 'org.junit.jupiter:junit-jupiter:5.6.0'
     compile 'com.alibaba:fastjson:1.2.58'
     compile 'com.google.guava:guava:27.0.1-jre'
     implementation 'org.apache.commons:commons-lang3:3.9'
     implementation 'redis.clients:jedis:3.2.0'
+    implementation 'com.rabbitmq:amqp-client:5.9.0'
     implementation 'commons-pool:commons-pool:20030825.183949'
     implementation 'org.apache.commons:commons-collections4:4.4'
 }

@@ -79,6 +79,11 @@ interface AppleFormatter{
     String accept(Apple apple);
 }
 
+@FunctionalInterface
+interface AppleINS{
+    Apple get(String s, Double d);
+}
+
 class AppleHeavyPrinter implements AppleFormatter {
     @Override
     public String accept(Apple apple) {
