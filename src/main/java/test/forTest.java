@@ -1,7 +1,7 @@
 package test;
 
-import Entitys.Entity;
-import Entitys.TreeNode;
+import entity.Entity;
+import entity.TreeNode;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.TreeMap;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -125,19 +124,9 @@ public class forTest {
     @Test
     public void test4(){
         // &&的优先级高于||
-        if (false || returnFalse() && returnTrue()) {
+        if (false || false && true) {
             System.out.println(1);
         }
-    }
-
-    public static boolean returnTrue() {
-        System.out.println("真");
-        return true;
-    }
-
-    public static boolean returnFalse() {
-        System.out.println("假");
-        return false;
     }
 
     @Test
@@ -170,130 +159,4 @@ public class forTest {
                 "'";
         System.out.println(updateSql);
     }
-
-    @Test
-    public void test8() throws IOException {
-
-        List<String> columns = Lists.newArrayList("DEPARTMENT_ID", "PERIOD", "CUSTOMER_NO", "SORT_INDEX");
-        List<String> result = Lists.newArrayList();
-        for (int i = 0; i < 9; i++) {
-            String insertSql = "insert into KGRP.R_789(DEPARTMENT_ID,PERIOD,CUSTOMER_NO,SORT_INDEX,A2,B2) values" +
-                    "('$DEPARTMENT_ID$','$PERIOD$','$CUSTOMER_NO$','$SORT_INDEX$','$A2$','$B2$')";
-            for (String column : columns) {
-                String replacement = "$" + column + "$";
-                if ("$SORT_INDEX$".equals(replacement)) {
-                    insertSql = StringUtils.replace(insertSql, replacement, String.valueOf(i));
-                } else if ("$DEPARTMENT_ID$".equals(replacement)) {
-                    insertSql = StringUtils.replace(insertSql, replacement, "100100");
-                } else if ("$PERIOD$".equals(replacement)) {
-                    insertSql = StringUtils.replace(insertSql, replacement, "20191129");
-                } else if ("$CUSTOMER_NO$".equals(replacement)) {
-                    insertSql = StringUtils.replace(insertSql, replacement, "79023");
-                } else {
-                    insertSql = StringUtils.replace(insertSql, replacement, "");
-                }
-            }
-            result.add(insertSql);
-        }
-        result.stream().forEach(System.out::println);
-    }
-
-    @Test
-    public void speedTest() throws ClassNotFoundException, NoSuchFieldException, InterruptedException {
-        Object lock = new Object();
-        Thread a = new Thread(() -> {
-            synchronized (lock) {
-                try {
-                    lock.wait();
-                    for (int i = 0; i < 10; i++) {
-                        System.out.println(1);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Thread b = new Thread(() -> {
-            synchronized (lock) {
-                lock.notify();
-            }
-        });
-        a.start();
-        Thread.sleep(1000);
-        b.start();
-
-    }
-
-    @Test
-    void rebuildTreeBySerl() throws Exception {
-        // 终于
-        int[] preorder = {1, 2, 4, 7, 3, 5, 6, 8};
-        int[] inorder = {4, 7, 2, 1, 5, 3, 8, 6};
-        // 根据先序和中序序列重建二叉树
-        TreeNode root =  rebuildTree(preorder, 0, preorder.length-1,
-                inorder, 0, inorder.length-1);
-
-        // 获取每一层中的节点 宽度优先？
-        List<HashMap<Integer, Object>> list = Lists.newArrayList();
-        traveTree(0, root, list);
-        Map<Integer, List<Object>> collect = list.stream().collect(Collectors.groupingBy(t -> t.keySet().iterator().next(),
-                Collectors.mapping(t -> t.values().iterator().next(), Collectors.toList())));
-        System.out.println(collect);
-
-        Integer i = Optional.of(1).orElse(0);
-
-    }
-
-    private void traveTree(int i, TreeNode root, List<HashMap<Integer, Object>> list) {
-        if (root != null) {
-            int n = i + 1;
-            List<Object> innerList = Lists.newArrayList();
-            HashMap<Integer, Object> map = Maps.newHashMap();
-            map.put(n, root.value);
-            innerList.add(map);
-            list.add(map);
-
-            traveTree(n, root.left, list);
-            traveTree(n, root.right, list);
-        }
-    }
-
-    private TreeNode rebuildTree(int[] preorder, int startPreorder, int endPreorder, int[] inorder, int startInorder,
-                                 int endInorder) {
-        TreeNode root = new TreeNode();
-        // 获取root元素在中序中的相对位置
-        int breakLength = getBreakLength(preorder, startPreorder, inorder, startInorder, endInorder);
-
-        int lStartInorder = startInorder;
-        int lEndInorder = startInorder + breakLength - 1;
-        int lStartPreorder = startPreorder + 1;
-        int lEndPreorder = startPreorder + breakLength;
-
-        int rStartInorder = startInorder + breakLength + 1;
-        int rEndInorder = endInorder;
-        int rStartPreorder = startPreorder + breakLength + 1;
-        int rEndPreorder = endPreorder;
-
-        root.value = preorder[startPreorder];
-        root.left = breakLength == 0 ? null :
-                rebuildTree(preorder, lStartPreorder, lEndPreorder, inorder, lStartInorder, lEndInorder);
-        root.right = (breakLength == endInorder - startInorder) ? null :
-                rebuildTree(preorder, rStartPreorder, rEndPreorder, inorder, rStartInorder, rEndInorder);
-        return root;
-    }
-
-    private int getBreakLength(int[] preorder, int startPreorder, int[] inorder, int startInorder, int endInorder) {
-        for (int i = startInorder; i < endInorder + 1; i++) {
-            if(inorder[i] == preorder[startPreorder])
-                return i - startInorder;
-        }
-        return -1;
-    }
-
-    @Test
-    void test12() throws IOException {
-        System.out.println("开始监听");
-        System.in.read();
-    }
-
 }

@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
  * @create 2020/09/02 18:37
  */
 public class PMTest {
-    // 传统代理,需要创建类
+    // 传统代理,需要传入目标对象
     @Test
     void test1() {
         UserService userService = new UserServiceImpl();

@@ -13,7 +13,6 @@ public class MainTest {
     private boolean is;
     public static void main(String[] args) throws InterruptedException {
         MainTest test = new MainTest();
-        System.out.println(test.is
-        );
+        System.out.println(test.is);
     }
 }

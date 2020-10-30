@@ -1,4 +1,4 @@
-package Entitys;
+package entity;
 
 /**
  * @author wusd
