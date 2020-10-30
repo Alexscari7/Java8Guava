@@ -1,4 +1,4 @@
-package optionaltest;
+package optional;
 
 import org.junit.jupiter.api.Test;
 

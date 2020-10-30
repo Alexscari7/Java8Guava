@@ -45,11 +45,8 @@ public enum Color {
                 ", index='" + index + '\'' +
                 '}';
     }
-}
-class EnumTest {
 
-    @Test
-    void test(){
+    public static void main(String[] args) {
         Color red = Color.RED;
         Color yellow = Color.YELLOW;
         System.out.println(yellow.toString());

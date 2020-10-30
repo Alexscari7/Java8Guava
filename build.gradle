@@ -35,6 +35,12 @@ dependencies {
     implementation 'com.rabbitmq:amqp-client:5.9.0'
     implementation 'commons-pool:commons-pool:20030825.183949'
     implementation 'org.apache.commons:commons-collections4:4.4'
+
+    implementation 'mysql:mysql-connector-java:5.1.38'
+
+    implementation 'org.apache.zookeeper:zookeeper:3.4.6'
+
+    implementation 'org.quartz-scheduler:quartz:2.3.0'
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
