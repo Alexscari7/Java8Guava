@@ -1,4 +1,4 @@
-package headfirst;
+package headfirst.strategy_pattern;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,14 +44,15 @@ class Duck {
     //会叫（嘎嘎，哇哇）
     protected QuackBehavior  quackBehavior;
 
-    //会游泳（修饰符为default，范围为本类，本包）
-    void swim(){
+    //会游泳
+    public void swim(){
         System.out.println("I can swim");
     }
     //会show
     public void show(){
         System.out.println("Show time");
     }
+
     public void setFlyBehavior(FlyBehavior flyBehavior){
         this.flyBehavior = flyBehavior;
     }

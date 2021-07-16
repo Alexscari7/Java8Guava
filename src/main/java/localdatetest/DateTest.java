@@ -1,10 +1,5 @@
 package localdatetest;
 
-import headfirst.DiffDuck;
-import org.junit.jupiter.api.Test;
-
-import java.util.Comparator;
-
 /**
  * @author wusd
  * @description 空
