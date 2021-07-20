@@ -7,23 +7,13 @@ import org.junit.jupiter.api.Test;
  * @description Strategy pattern 策略模式
  * @createtime 2019/08/08 16:26
  */
-public class DiffDuck extends Duck {
-    public DiffDuck(){
-        this.flyBehavior = new FlyWithWings();
-        this.quackBehavior = new QuackLikeGAGA();
-    }
-
-    public DiffDuck(FlyBehavior flyBehavior, QuackBehavior quackBehavior){
-        this.flyBehavior = flyBehavior;
-        this.quackBehavior = quackBehavior;
-    }
-
-    public void performFly(){
-        flyBehavior.fly();
-    }
-
-    public void performQuack(){
-        quackBehavior.quack();
+public class DifferentDuck {
+    public static void main(String[] args) {
+        DiffDuck duck = new DiffDuck(new FlyWithWings(), new QuackLikeGAGA());
+        duck.performFly();
+        duck.performQuack();
+        duck.setQuackBehavior(new QuackLikeWAWA());
+        duck.performQuack();
     }
 }
 
@@ -59,6 +49,26 @@ class Duck {
 
     public void setQuackBehavior(QuackBehavior quackBehavior) {
         this.quackBehavior = quackBehavior;
+    }
+}
+
+class DiffDuck extends Duck {
+    public DiffDuck(){
+        this.flyBehavior = new FlyWithWings();
+        this.quackBehavior = new QuackLikeGAGA();
+    }
+
+    public DiffDuck(FlyBehavior flyBehavior, QuackBehavior quackBehavior){
+        this.flyBehavior = flyBehavior;
+        this.quackBehavior = quackBehavior;
+    }
+
+    public void performFly(){
+        flyBehavior.fly();
+    }
+
+    public void performQuack(){
+        quackBehavior.quack();
     }
 }
 
