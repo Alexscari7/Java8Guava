@@ -10,5 +10,6 @@ out/
 gen
 build/
 logs/
+target/
 
 

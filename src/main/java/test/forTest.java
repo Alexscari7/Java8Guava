@@ -1,27 +1,21 @@
 package test;
 
-import entity.Entity;
-import entity.TreeNode;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
+import entity.Entity;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.beans.PropertyDescriptor;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -91,6 +85,7 @@ public class forTest {
 
     @Test
     public void test2(){
+        // test2
         Entity source = new Entity("王", "2018", "2");
         Entity target = new Entity(null, "2019", "1");
         Class clazz = source.getClass();

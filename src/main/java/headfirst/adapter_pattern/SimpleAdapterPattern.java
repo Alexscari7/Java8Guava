@@ -1,7 +1,5 @@
 package headfirst.adapter_pattern;
 
-import com.sun.xml.internal.ws.api.server.Adapter;
-
 /**
  * N
  *

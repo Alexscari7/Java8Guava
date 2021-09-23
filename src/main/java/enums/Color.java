@@ -1,6 +1,4 @@
-package enumtest;
-
-import org.junit.jupiter.api.Test;
+package enums;
 
 /**
  * @author wusd
