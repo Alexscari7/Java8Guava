@@ -1,20 +1,15 @@
-package completablefuturetest;
+package java8start.completablefuturetest;
 
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 
-import javax.annotation.processing.Completion;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author wusd
@@ -135,133 +130,4 @@ public class BestPriceEp {
         System.out.println(String.format("Get all price takes %dms", (System.nanoTime() - startTime) / 1_000_000));
     }
 
-}
-
-@Data
-class Shop {
-    private String name;
-
-    private Random random = new Random();
-
-    public Shop(String name) {
-        this.name = name;
-    }
-
-    // 异步获取商品价格
-    public Future<Double> getPriceAsyn(String product) {
-        // 原始方式
-        /*CompletableFuture<Double> future = new CompletableFuture<>();
-        new Thread(() -> {
-            try {
-                double price = getPrice(product);
-                future.complete(price);
-            } catch (Exception e) {
-                future.completeExceptionally(e);
-            }
-        }).start();
-        return future;*/
-
-        // lambda
-        return CompletableFuture.supplyAsync(() -> getPrice(product));
-    }
-
-    public double getPrice(String product) {
-        return calculatePrice(product);
-    }
-
-    // 返回shop-name:product:price:code格式订单信息
-    public String getPriceString(String product) {
-        double price = calculatePrice(product);
-        // 模拟折扣
-        Discount.Code code = Discount.Code.values()[random.nextInt(Discount.Code.values().length)];
-        return String.format("%s:%s:%.2f:%s", this.getName(), product, price, code);
-    }
-
-    private double calculatePrice(String product) {
-        // 模拟查询操作耗时
-        delay();
-        // 模拟商品价格
-        return product.charAt(0) * this.name.charAt(0) * random.nextDouble();
-    }
-
-    private void delay() {
-        // 模拟耗时1s
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-// 模拟折扣(远程折扣服务，模拟耗时)
-class Discount {
-    public enum Code {
-        NONE(0), SILVER(5), GOLD(10), PLATINUM(15), DIAMOND(20);
-
-        private final int percentage;
-
-        Code (int percentage) {
-            this.percentage = percentage;
-        }
-    }
-
-    public static String applyDiscount(Quote quote) {
-        return String.format("%s cost %.2f in %s", quote.getProduct(), apply(quote.getPrice(),
-                quote.getCode()), quote.getShopName());
-    }
-
-    private static Double apply(double price, Code code) {
-        delay();
-        return price * (100 - code.percentage) / 100;
-    }
-
-    private static void delay() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 随机时间
-    public static String applyDiscountRD(Quote quote) {
-        return String.format("%s cost %.2f in %s", quote.getProduct(), applyRD(quote.getPrice(),
-                quote.getCode()), quote.getShopName());
-    }
-
-    private static Double applyRD(double price, Code code) {
-        delayRD();
-        return price * (100 - code.percentage) / 100;
-    }
-
-    private static void delayRD() {
-        Random random = new Random();
-        try {
-            Thread.sleep(random.nextInt(4000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-// 模拟订单
-@Data
-class Quote {
-    private String shopName;
-    private String product;
-    private double price;
-    private Discount.Code code;
-
-    public Quote (String shopName, String product, double price, Discount.Code code) {
-        this.shopName = shopName;
-        this.product = product;
-        this.price = price;
-        this.code = code;
-    }
-
-    public static Quote parseToQuote(String order) {
-        String[] values = order.split(":");
-        return new Quote(values[0], values[1], Double.parseDouble(values[2]), Discount.Code.valueOf(values[3]));
-    }
 }

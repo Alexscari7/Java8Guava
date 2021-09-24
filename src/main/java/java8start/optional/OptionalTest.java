@@ -1,4 +1,4 @@
-package optional;
+package java8start.optional;
 
 import org.junit.jupiter.api.Test;
 

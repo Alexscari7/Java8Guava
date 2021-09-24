@@ -1,4 +1,4 @@
-package completablefuturetest;
+package java8start.completablefuturetest;
 
 import org.junit.jupiter.api.Test;
 

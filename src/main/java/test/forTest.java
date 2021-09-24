@@ -30,6 +30,7 @@ public class forTest {
 
     @Test
     public void test() {
+        // for test
         Entity e1 = new Entity("王", "sz", "1");
         Entity e2 = new Entity("吴", "sz", "2");
         Entity e3 = new Entity("李", "wh", "1");

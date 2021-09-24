@@ -5,9 +5,9 @@
             <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
         </Console>
 
-        <File name="File" fileName="F://logs/debug.log" append="true">
+        <!--<File name="File" fileName="F://logs/debug.log" append="true">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
-        </File>
+        </File>-->
     </Appenders>
     <Loggers>
         <!--<Logger name="slf4config.Slf4Test" level="INFO">

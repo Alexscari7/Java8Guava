@@ -61,7 +61,7 @@ class FirstStart {
     }
 
     @ParameterizedTest
-    @EnumSource(mode = EnumSource.Mode.EXCLUDE, names = {"YELLOW"})
+    @EnumSource(value = Color.class, names = {"YELLOW"}, mode = EnumSource.Mode.EXCLUDE)
     void test21(Color color) {
         assertTrue(EnumSet.of(Color.RED, Color.GREEN).contains(color));
     }
