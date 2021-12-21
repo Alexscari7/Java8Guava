@@ -2,18 +2,53 @@ package leetcode;
 
 /**
  * @author wusd
- * @description
- * 请实现有重复数字的有序数组的二分查找。
- * 输出在数组中第一个大于等于查找值的位置，如果数组中不存在这样的数，则输出数组长度。
- * 输入：5,4,[1,2,4,4,5]
- * 输出：3
- * @create 2020/10/15 17:30
  */
 public class BinarySearch {
-    public static int upper_bound_ (int n, int v, int[] a) {
+
+    public static void main(String[] args) {
+        int v = 3;
+        int[] a= {1,2,4,4,5};
+        System.out.println(repeatBinarySearch(v, a));
+    }
+
+
+    // 标准二分，判断是否能找到target
+    public static boolean binarySearch(int[] array, int target) {
+        int start = 0;
+        int end = array.length - 1;
+        while (start <= end) {
+            int middle = ((end - start) >> 1) + start;
+            if (target < array[middle]) {
+                end = middle - 1;
+            } else if (target > array[middle]) {
+                start = middle + 1;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 找到最大的小于等于target的数
+    public static int leBinarySearch(int[] array, int target) {
+        int start = -1;
+        int end = array.length - 1;
+        while (start < end) {
+            int middle = ((end - start + 1) >> 1) + start;
+            if (target < array[middle]) {
+                end = middle - 1;
+            } else {
+                start = middle;
+            }
+        }
+        return start < 0 ? -1 : array[start];
+    }
+
+    // 请实现有重复数字的有序数组的二分查找。
+    public static int repeatBinarySearch (int v, int[] a) {
         int l=0;
-        int r=n-1;
-        while (l < n - 1) {
+        int r=a.length-1;
+        while (l < a.length - 1) {
             int mid = (l + r) / 2;
             if(a[mid] == v){
                 // 针对条件：可重复
@@ -31,12 +66,6 @@ public class BinarySearch {
                 r=mid-1;
             }
         }
-        return n;
-    }
-
-    public static void main(String[] args) {
-        int v = 3;
-        int[] a= {1,2,4,4,5};
-        System.out.println(upper_bound_(a.length, v, a));
+        return a.length;
     }
 }
