@@ -23,7 +23,7 @@ public class Singletonn {
     // 错误双检锁未使用volatile
     public static Singletonn getInstance1() {
         if (instance == null) {
-            // 使用两次null判断，防止线程1判断进入后，失去CPU，线程2判断进入初始化实例完成，1重新运行需要重新判断null
+            // 使用两次null判断，防止两个线程同时进入第一层for循环，线程1获取锁初始化实例成功后，线程2再进来就不应该再new了
             synchronized (Singletonn.class) {
                 if (instance == null) {
                     instance = new Singletonn();

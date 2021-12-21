@@ -1,8 +1,5 @@
 package designdemo.SingletonMode;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-
 /**
  * @author wusd
  * @description 单例模式
@@ -14,7 +11,7 @@ public class SingletonHolder {
     private static class Holder{
         private static SingletonHolder instance = new SingletonHolder();
     }
-    // jvm不会主动加载静态内部类，只有用到它时才去加载，在加载类的时候，所有类变量赋值和静态语句在<clinit>()方法中进行。
+    // jvm不会主动加载静态内部类，只有访问它时才去加载，在加载类的时候，所有类变量赋值和静态语句在<clinit>()方法中进行。
     // 虚拟机会保证一个类的<clinit>()方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，
     // 那么只会有一个线程去执行这个类的<clinit>()方法，其他线程都需要阻塞等待，直到活动线程执行<clinit>()方法完毕。
     // 如果在一个类的<clinit>()方法中有耗时很长的操作，就可能造成多个进程阻塞
