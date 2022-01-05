@@ -7,7 +7,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,7 @@ import java.util.Map;
  */
 public class MybatisInterceptor {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
         Map<String, String> map = new HashMap<>();
         map.put("1", "1");
         List<String> list = Lists.newArrayList("1");
@@ -26,7 +25,6 @@ public class MybatisInterceptor {
         InterceptorChain interceptorChain = new InterceptorChain().addInterceptor(mapInterceptor).addInterceptor(listInterceptor);
         List o = (List)interceptorChain.applyTo(list);
         System.out.println(o.get(1));
-        System.out.println(Arrays.toString(o.toArray()));
     }
 
 
@@ -38,22 +36,34 @@ class Plugin implements InvocationHandler {
 
     private Interceptor interceptor;
 
-    public Plugin(Object target, Interceptor interceptor) {
+    private Method method;
+
+    public Plugin(Object target, Interceptor interceptor, Method method) {
         this.target = target;
         this.interceptor = interceptor;
+        this.method = method;
     }
 
-    public static Object apply(Object target, Interceptor interceptor) {
-        return Proxy.newProxyInstance(
-                target.getClass().getClassLoader(),
-                target.getClass().getInterfaces(),
-                new Plugin(target, interceptor)
-        );
+    public static Object apply(Object target, Interceptor interceptor) throws NoSuchMethodException {
+        Signature sig = interceptor.getClass().getAnnotation(Signature.class);
+        Class<?> type = sig.type();
+        Method method = type.getMethod(sig.method(), sig.args());
+        if (type.getInterfaces().length > 0) {
+            return Proxy.newProxyInstance(
+                    target.getClass().getClassLoader(),
+                    target.getClass().getInterfaces(),
+                    new Plugin(target, interceptor, method)
+            );
+        }
+        return target;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return interceptor.intercept(target, method, args);
+        if (method == this.method) {
+            return interceptor.intercept(target, method, args);
+        }
+        return method.invoke(target, args);
     }
 
 }
@@ -71,7 +81,7 @@ interface Interceptor {
 class InterceptorChain {
     private List<Interceptor> interceptors = new ArrayList<>();
 
-    public Object applyTo(Object target) {
+    public Object applyTo(Object target) throws NoSuchMethodException {
         for (Interceptor interceptor : interceptors) {
             target = Plugin.apply(target, interceptor);
         }
@@ -85,23 +95,19 @@ class InterceptorChain {
 
 }
 
+@Signature(type=Map.class, method="get", args={Object.class})
 class MapAlwaysNullInterceptor implements Interceptor {
     @Override
-    public Object intercept(Object target, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
-        if (target instanceof Map) {
-            return "null";
-        }
-        return method.invoke(target, args);
+    public Object intercept(Object target, Method method, Object[] args) {
+        return "null";
     }
 }
 
+@Signature(type=List.class, method="get", args={Integer.class})
 class ListAlwaysEmptyInterceptor implements Interceptor {
     @Override
-    public Object intercept(Object target, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
-        if (target instanceof List) {
-            return "Empty";
-        }
-        return method.invoke(target, args);
+    public Object intercept(Object target, Method method, Object[] args) {
+        return "empty";
     }
 }
 
